@@ -37,7 +37,25 @@ class _UserScreenState extends State<UserScreen> {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
-                return ListTile(title: Text(user.username), subtitle: Text(user.phone), leading:const Icon(Icons.verified_user),);
+                return Card(
+                  elevation: 5.0,
+                  // shape: ShapeBorder.lerp(22, b, t),
+
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(
+                          user.username,
+                          style: TextStyle(fontSize: 22, color: Colors.green),
+                        ),
+                        Text(user.username),
+                        Text(user.email),
+                        Text(user.company.name),
+                        Text(user.website),
+                      ],
+                    ),
+                  ),
+                );
               },
             );
           }

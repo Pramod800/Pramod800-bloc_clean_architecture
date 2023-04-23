@@ -15,8 +15,7 @@ class _PostScreenState extends State<PostScreen> {
   @override
   void initState() {
     super.initState();
-    final posts = context.read<PostCubit>();
-    posts.getPosts();
+    context.read<PostCubit>().getPosts();
   }
 
   @override
@@ -25,7 +24,8 @@ class _PostScreenState extends State<PostScreen> {
       appBar: AppBar(title: const Text('Posts')),
       body: BlocBuilder<PostCubit, PostState>(
         builder: (context, state) {
-           if (state is PostLoading) {
+          print('State=>> $state'); //viewing the current state in ui
+          if (state is PostLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -34,29 +34,33 @@ class _PostScreenState extends State<PostScreen> {
             return ListView.builder(
               itemCount: posts.posts.length,
               itemBuilder: (context, index) {
-                final post = posts.posts[index];
-                return Card(
-                  elevation: 5.0,
-                  // shape: ShapeBorder.lerp(22, b, t),
+                // final post = posts.posts[index];
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Card(
+                    elevation: 5.0,
+                    // shape: ShapeBorder.lerp(22, b, t),
 
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Text(
-                          post.title,
-                          style: TextStyle(fontSize: 22, color: Colors.green),
-                        ),
-                        Text(post.reactions.toString()),
-                        Text(post.body),
-                        Text(post.tags.toString()),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            posts.posts[index].title,
+                            style: TextStyle(fontSize: 22, color: Colors.green),
+                          ),
+                          Text(posts.posts[index].reactions.toString()),
+                          Text(posts.posts[index].body),
+                          // Text(posts.posts[index].tags.toString()),
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
             );
           }
-          return Container();
+          return Container(child: const Center(child: Text('No Posts Found')));
         },
       ),
     );

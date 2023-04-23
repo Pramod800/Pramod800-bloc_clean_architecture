@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc_app_clean_architecture/presentation/screens/post_screen.dart';
+import 'package:flutter_bloc_app_clean_architecture/presentation/screens/user_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,10 +21,28 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
           child: Container(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: () {}, child: const Text('User')),
-                ElevatedButton(onPressed: () {}, child: const Text('Psosts'))
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserScreen()),
+                      );
+                    },
+                    child: const Text('User')),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostScreen()),
+                      );
+                    },
+                    child: const Text('Posts'))
               ],
             ),
           ),

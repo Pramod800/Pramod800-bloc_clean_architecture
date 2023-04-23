@@ -20,17 +20,14 @@ class DataSource {
     }
   }
 
-
-
-
-  Future<PostModel> fetchPosts( ) async{
-    var response= await http.get(Uri.parse('https://dummyjson.com//posts'));
-    if (response.statusCode==200){
-      final responseData=jsonDecode(response.body);
+  Future<PostModel> fetchPosts() async {
+    var response = await http.get(Uri.parse('https://dummyjson.com/posts'));
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      print('hello');
       return PostModel.fromJson(responseData);
-
-    }else {
-      throw Exception('hdhh');
+    } else {
+      throw Exception('Error Fetching data');
     }
   }
 }

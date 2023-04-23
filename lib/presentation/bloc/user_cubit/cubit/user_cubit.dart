@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc_app_clean_architecture/data/models/user_models.dart';
-import 'package:flutter_bloc_app_clean_architecture/data/repository/user_repo.dart';
+import 'package:flutter_bloc_app_clean_architecture/data/repository/repository.dart';
 import 'package:meta/meta.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  final UserRepository _userRepository;
+  final Repository _userRepository;
   UserCubit(this._userRepository) : super(UserInitial());
 
   void getUsers() async {

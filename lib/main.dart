@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app_clean_architecture/data/data_source/data_source.dart';
 import 'package:flutter_bloc_app_clean_architecture/data/repository/repository.dart';
+import 'package:flutter_bloc_app_clean_architecture/presentation/bloc/post_cubit/cubit/post_cubit.dart';
 import 'package:flutter_bloc_app_clean_architecture/presentation/bloc/user_cubit/cubit/user_cubit.dart';
 import 'package:flutter_bloc_app_clean_architecture/presentation/screens/home_screen.dart';
 import 'package:flutter_bloc_app_clean_architecture/presentation/screens/user_screen.dart';
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  bloc provider
-    return BlocProvider(
-      create: (context) => UserCubit(Repository(DataSource())),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserCubit(Repository(DataSource())),
+        ),
+        BlocProvider(
+          create: (context) => PostCubit(Repository(DataSource())),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
